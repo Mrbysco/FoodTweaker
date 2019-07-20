@@ -1,0 +1,16 @@
+[
+{
+  "modid": "foodtweaker",
+  "name": "Food Tweaker",
+  "description": "Changing Food Stats",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Mrbysco"],
+  "credits": "Svennieke for the idea",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

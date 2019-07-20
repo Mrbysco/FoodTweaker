@@ -1,0 +1,87 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url = "http://files.minecraftforge.net/maven" }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
+
+version = "1.0"
+group = "com.mrbysco.foodtweaker" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "FoodTweaker"
+
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+compileJava {
+    sourceCompatibility = targetCompatibility = '1.8'
+}
+
+minecraft {
+    version = "1.12.2-14.23.5.2768"
+    runDir = "run"
+    mappings = "stable_39"
+}
+
+repositories {
+	maven {
+		// location of the maven that hosts JEI files
+		name = "Progwml6 maven"
+		url = "http://dvs1.progwml6.com/files/maven"
+	}
+	maven {
+		// location of a maven mirror for JEI files, as a fallback
+		name = "ModMaven"
+		url = "modmaven.k-4u.nl"
+	}
+	maven {
+        url "http://maven.blamejared.com"
+	}
+	maven { 
+		url "http://tehnut.info/maven" 
+	}
+	maven {
+        name = "thiakil"
+        url = "http://maven.thiakil.com"
+	}
+    maven {
+        name = "TOP Maven"
+        url = "http://maven.tterrag.com"
+    }
+    maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+}
+
+dependencies {
+	deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
+	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.5.+"
+	
+	deobfCompile "mezz.jei:jei_1.12.2:4.11.0.+"
+	
+	compile files("lib/tiffitlib-1.0.3.jar")
+	compile files("lib/sanity-1.0.3.jar")
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+        
+    // copy everything else except the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
