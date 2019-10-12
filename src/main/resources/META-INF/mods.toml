@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+
+[[mods]]
+modId="foodtweaker"
+version="${file.jarVersion}"
+displayName="Food Tweaker"
+displayURL="https://github.com/Mrbysco/FoodTweaker"
+authors="Mrbysco"
+description='''Changing Food Stats'''
+credits="Svennieke for the idea"
+
+[[dependencies.foodtweaker]]
+modId="forge"
+mandatory=true
+versionRange="[28,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.foodtweaker]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.14.4]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.foodtweaker]]
+modId="crafttweaker"
+mandatory=true
+versionRange="[1.14.4]"
+ordering="NONE"
+side="BOTH"

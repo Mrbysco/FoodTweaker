@@ -1,103 +1,72 @@
 package com.mrbysco.foodtweaker;
 
-import com.mrbysco.foodtweaker.proxy.CommonProxy;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.Optional.Method;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import org.apache.commons.lang3.tuple.Pair;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.HashMap;
+import java.util.List;
 
-@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION, dependencies = Reference.DEPENDENCIES)
+@Mod(Reference.MOD_ID)
 public class FoodTweaker {
-	@Instance(Reference.MOD_ID)
-	public static FoodTweaker instance;
+    public static final Logger LOGGER = LogManager.getLogger();
 
-	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-	public static CommonProxy proxy;
+    public FoodTweaker() {
+        // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	public static final Logger LOGGER = LogManager.getLogger(Reference.MOD_ID);
+    @SubscribeEvent
+    public void tooltipEvent(ItemTooltipEvent event) {
+        if(event.getItemStack().isFood()) {
+            List<ITextComponent> toolTip = event.getToolTip();
+            Food food = event.getItemStack().getItem().getFood();
+            toolTip.add(new StringTextComponent("Food stats:").applyTextStyle(TextFormatting.GREEN));
+            toolTip.add(new StringTextComponent("Health: ").applyTextStyle(TextFormatting.GOLD)
+                    .appendSibling(new StringTextComponent(String.valueOf(food.getHealing())).applyTextStyle(TextFormatting.YELLOW)));
+            toolTip.add(new StringTextComponent("Saturation: ").applyTextStyle(TextFormatting.GOLD)
+                    .appendSibling(new StringTextComponent(String.valueOf(food.getSaturation())).applyTextStyle(TextFormatting.YELLOW)));
+            toolTip.add(new StringTextComponent("Always edible: ").applyTextStyle(TextFormatting.DARK_RED)
+                    .appendSibling(new StringTextComponent(String.valueOf(food.canEatWhenFull())).applyTextStyle(TextFormatting.RED)));
+            toolTip.add(new StringTextComponent("Is dog food: ").applyTextStyle(TextFormatting.DARK_AQUA)
+                    .appendSibling(new StringTextComponent(String.valueOf(food.isMeat())).applyTextStyle(TextFormatting.AQUA)));
 
-	public static HashMap<ItemStack, FoodInfo> foodInfo = new HashMap<ItemStack, FoodInfo>();
+            List<Pair<EffectInstance, Float>> effects = food.getEffects();
+            StringTextComponent effectNames = new StringTextComponent("");
+            if(!food.getEffects().isEmpty()) {
+                effectNames.applyTextStyle(TextFormatting.LIGHT_PURPLE);
+                for(int i = 0; i < effects.size(); i++) {
+                    EffectInstance effect = effects.get(i).getKey();
+                    effectNames.appendSibling(new TranslationTextComponent(effect.getEffectName())
+                            .appendSibling(new StringTextComponent(" " + RomanUtil.intToRoman(effect.getAmplifier() + 1)))
+                            .appendSibling(new StringTextComponent(" with a " + (int)((Math.round(effects.get(i).getValue() * 10) / 10.0) * 100) + "% chance for " + (effect.getDuration() / 20) + " second(s)")));
+                    if(i < effects.size() - 1) {
+                        effectNames.appendSibling(new StringTextComponent(", \n"));
+                    }
+                }
+                toolTip.add(new StringTextComponent("Effects: \n").applyTextStyle(TextFormatting.DARK_PURPLE).appendSibling(effectNames));
+            }
+        }
+    }
 
-	public static void addFoodInfo(ItemStack food, FoodInfo info)
-	{
-		// Check if the info doesn't already exist
-		if(foodInfo.containsKey(food) ) {
-			return;
-		} else {
-			foodInfo.put(food, info);
-		}
-	}
+    public static void changeFood(Item item, Food food) {
+        LOGGER.info("Changing food value of " + item.getName());
+        ObfuscationReflectionHelper.setPrivateValue(Item.class, item, food, "food");
+    }
 
-	@EventHandler
-	public void Preinit(FMLPreInitializationEvent event)
-	{
-		MinecraftForge.EVENT_BUS.register(this);
-	}
-
-
-	@EventHandler
-	public void Postinit(FMLPostInitializationEvent event)
-	{
-		replaceFoodValues();
-	}
-
-	@SubscribeEvent
-	public void SanityEven(LivingEntityUseItemEvent.Finish event)
-	{
-		if(event.getEntityLiving() instanceof EntityPlayerMP){
-			EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
-			for(HashMap.Entry<ItemStack, FoodInfo> entry : foodInfo.entrySet()) {
-				ItemStack compareStack = entry.getKey();
-				FoodInfo info = entry.getValue();
-				if(compareStack.isItemEqualIgnoreDurability(event.getItem())) {
-					if(info.getSanityAmount() != 0.0F) {
-						induceSanity(player, info.getSanityAmount());
-					}
-					break;
-				} else {
-					return;
-				}
-			}
-		}
-	}
-
-	@Method(modid = "sanity")
-	public void induceSanity(EntityPlayerMP player, float sanity) {
-		net.tiffit.sanity.SanityCapability cap = player.getCapability(net.tiffit.sanity.SanityCapability.INSTANCE, null);
-		cap.increaseSanity(sanity);
-	}
-
-	public void replaceFoodValues() {
-		for(HashMap.Entry<ItemStack, FoodInfo> entry : foodInfo.entrySet()) {
-			if(entry.getKey().getItem() instanceof ItemFood) {
-				FoodInfo info = entry.getValue();
-				ItemFood item = (ItemFood)entry.getKey().getItem();
-
-				if(item.getHealAmount(entry.getKey()) != info.getHealAmount()) {
-					ReflectionHelper.setPrivateValue(ItemFood.class, item, info.getHealAmount(), "healAmount", "field_77853_b");
-				}
-				if(item.getSaturationModifier(entry.getKey()) != info.getSaturationAmount()) {
-					ReflectionHelper.setPrivateValue(ItemFood.class, item, info.getSaturationAmount(), "saturationModifier", "field_77854_c");
-				}
-
-				if(info.isAlwaysEdibleChanged()) {
-					ReflectionHelper.setPrivateValue(ItemFood.class, item, info.isAlwaysEdible(), "alwaysEdible", "field_77852_bZ");
-				}
-			}
-		}
-	}
+    public static void removeFood(Item item) {
+        LOGGER.info("Remove food values from " + item.getName());
+        ObfuscationReflectionHelper.setPrivateValue(Item.class, item, null, "food");
+    }
 }
