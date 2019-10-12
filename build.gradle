@@ -22,7 +22,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 minecraft {
     mappings channel: 'snapshot', version: '20190719-1.14.3'
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -107,9 +107,9 @@ dependencies {
 	runtimeOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.18")
 	
 	// compile against the JEI API but do not include it at runtime
-	compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker:1.14.4-5.0.0.86")
+	compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker:1.14.4-5.0.0.87")
 	// at runtime, use the full JEI jar
-	runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker:1.14.4-5.0.0.86")
+	runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker:1.14.4-5.0.0.87")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -125,4 +125,11 @@ jar {
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
+}
+
+task deobfJar(type: Jar) {
+    description = 'Creates a JAR containing the non-obfuscated compiled code.'
+    from sourceSets.main.output
+    //from files(zenCodeDeps.collect { project(it).sourceSets.main.output })
+    classifier = "deobf"
 }

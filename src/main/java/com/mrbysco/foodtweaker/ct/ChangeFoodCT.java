@@ -10,13 +10,14 @@ import org.openzen.zencode.java.ZenCodeType.Name;
 @ZenRegister
 @Name("mods.foodtweaker")
 public class ChangeFoodCT {
+
     @Method
-    public void changeFood(IItemStack stack, MCFood food) {
+    public static void changeFood(IItemStack stack, MCFood food) {
         CraftTweakerAPI.apply(new ActionChangeFood(stack, food));
     }
 
     @Method
-    public void removeFood(IItemStack stack) {
+    public static void removeFood(IItemStack stack) {
         CraftTweakerAPI.apply(new ActionRemoveFood(stack));
     }
 }
