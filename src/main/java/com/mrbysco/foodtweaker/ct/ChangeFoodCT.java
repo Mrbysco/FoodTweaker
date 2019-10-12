@@ -8,7 +8,7 @@ import org.openzen.zencode.java.ZenCodeType.Method;
 import org.openzen.zencode.java.ZenCodeType.Name;
 
 @ZenRegister
-@Name("foodtweaker")
+@Name("mods.foodtweaker")
 public class ChangeFoodCT {
     @Method
     public void changeFood(IItemStack stack, MCFood food) {

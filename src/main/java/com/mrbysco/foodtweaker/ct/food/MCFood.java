@@ -15,7 +15,7 @@ import org.openzen.zencode.java.ZenCodeType.Name;
 import java.util.List;
 
 @ZenRegister
-@Name("foodtweaker.MCFood")
+@Name("mods.foodtweaker.MCFood")
 public class MCFood {
     private final Food internal;
 
