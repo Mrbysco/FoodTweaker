@@ -127,9 +127,8 @@ jar {
     }
 }
 
-task deobfJar(type: Jar) {
-    description = 'Creates a JAR containing the non-obfuscated compiled code.'
-    from sourceSets.main.output
-    //from files(zenCodeDeps.collect { project(it).sourceSets.main.output })
-    classifier = "deobf"
-}
+//task deobfJar(type: Jar) {
+//    description = 'Creates a JAR containing the non-obfuscated compiled code.'
+//    from sourceSets.main.output
+//    classifier = "deobf"
+//}
