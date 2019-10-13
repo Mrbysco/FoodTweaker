@@ -1,11 +1,10 @@
 package com.mrbysco.foodtweaker.ct;
 
 import com.blamejared.crafttweaker.api.actions.IAction;
-import com.blamejared.crafttweaker.api.actions.IRuntimeAction;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.mrbysco.foodtweaker.FoodTweaker;
 
-public class ActionRemoveFood implements IRuntimeAction {
+public class ActionRemoveFood implements IAction {
 
     public final IItemStack[] stacks;
 

@@ -29,7 +29,7 @@ public class FoodTweaker {
 
     @SubscribeEvent
     public void tooltipEvent(ItemTooltipEvent event) {
-        if(event.getItemStack().isFood()) {
+        if (event.getItemStack().isFood()) {
             List<ITextComponent> toolTip = event.getToolTip();
             Food food = event.getItemStack().getItem().getFood();
             toolTip.add(new StringTextComponent("Food stats:").applyTextStyle(TextFormatting.GREEN));
@@ -44,14 +44,14 @@ public class FoodTweaker {
 
             List<Pair<EffectInstance, Float>> effects = food.getEffects();
             StringTextComponent effectNames = new StringTextComponent("");
-            if(!food.getEffects().isEmpty()) {
+            if (!food.getEffects().isEmpty()) {
                 effectNames.applyTextStyle(TextFormatting.LIGHT_PURPLE);
-                for(int i = 0; i < effects.size(); i++) {
+                for (int i = 0; i < effects.size(); i++) {
                     EffectInstance effect = effects.get(i).getKey();
                     effectNames.appendSibling(new TranslationTextComponent(effect.getEffectName())
                             .appendSibling(new StringTextComponent(" " + RomanUtil.intToRoman(effect.getAmplifier() + 1)))
-                            .appendSibling(new StringTextComponent(" with a " + (int)((Math.round(effects.get(i).getValue() * 10) / 10.0) * 100) + "% chance for " + (effect.getDuration() / 20) + " second(s)")));
-                    if(i < effects.size() - 1) {
+                            .appendSibling(new StringTextComponent(" with a " + (int) ((Math.round(effects.get(i).getValue() * 10) / 10.0) * 100) + "% chance for " + (effect.getDuration() / 20) + " second(s)")));
+                    if (i < effects.size() - 1) {
                         effectNames.appendSibling(new StringTextComponent(", \n"));
                     }
                 }
