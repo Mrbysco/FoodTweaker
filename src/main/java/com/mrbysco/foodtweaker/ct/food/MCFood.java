@@ -7,15 +7,12 @@ import net.minecraft.item.Food;
 import net.minecraft.potion.EffectInstance;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import org.apache.commons.lang3.tuple.Pair;
-import org.openzen.zencode.java.ZenCodeType.Constructor;
-import org.openzen.zencode.java.ZenCodeType.Getter;
-import org.openzen.zencode.java.ZenCodeType.Method;
-import org.openzen.zencode.java.ZenCodeType.Name;
+import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.List;
 
 @ZenRegister
-@Name("mods.foodtweaker.MCFood")
+@ZenCodeType.Name("mods.foodtweaker.MCFood")
 public class MCFood {
     private final Food internal;
 
@@ -23,33 +20,33 @@ public class MCFood {
         this.internal = food;
     }
 
-    @Constructor
+    @ZenCodeType.Constructor
     public MCFood(int healing, float saturation) {
         this(new Food.Builder().hunger(healing).saturation(saturation).build());
     }
 
-    @Method
+    @ZenCodeType.Method
     public MCFood meat() {
         Food newInternal = this.getInternal();
         changeValue(newInternal, "food", true);
         return new MCFood(newInternal);
     }
 
-    @Method
+    @ZenCodeType.Method
     public MCFood setAlwaysEdible() {
         Food newInternal = this.getInternal();
         changeValue(newInternal, "canEatWhenFull", true);
         return new MCFood(newInternal);
     }
 
-    @Method
+    @ZenCodeType.Method
     public MCFood fastToEat() {
         Food newInternal = this.getInternal();
         changeValue(newInternal, "fastToEat", true);
         return new MCFood(newInternal);
     }
 
-    @Method
+    @ZenCodeType.Method
     public MCFood setEffect(MCEffectInstance effect, float probability) {
         Food newInternal = this.getInternal();
         List<Pair<EffectInstance, Float>> effectList = Lists.newArrayList();
@@ -58,7 +55,7 @@ public class MCFood {
         return new MCFood(newInternal);
     }
 
-    @Method
+    @ZenCodeType.Method
     public MCFood setEffects(MCEffectInstance[] effects, float[] probability) {
         Food newInternal = this.getInternal();
 
@@ -72,32 +69,32 @@ public class MCFood {
         return new MCFood(newInternal);
     }
 
-    @Getter("saturation")
+    @ZenCodeType.Getter("saturation")
     public Float getSaturation() {
         return this.internal.getSaturation();
     }
 
-    @Getter("healing")
+    @ZenCodeType.Getter("healing")
     public Float getHealing() {
         return this.internal.getSaturation();
     }
 
-    @Getter("alwaysEdible")
+    @ZenCodeType.Getter("alwaysEdible")
     public boolean isAlwaysEdible() {
         return this.internal.canEatWhenFull();
     }
 
-    @Getter("meat")
+    @ZenCodeType.Getter("meat")
     public boolean isMeat() {
         return this.internal.isMeat();
     }
 
-    @Getter("fastEating")
+    @ZenCodeType.Getter("fastEating")
     public boolean isFastEating() {
         return this.internal.canEatWhenFull();
     }
 
-    @Getter("effects")
+    @ZenCodeType.Getter("effects")
     public List<Pair<EffectInstance, Float>> getEffects() {
         return this.internal.getEffects();
     }

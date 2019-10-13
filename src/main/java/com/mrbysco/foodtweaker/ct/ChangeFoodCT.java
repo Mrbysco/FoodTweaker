@@ -4,20 +4,24 @@ import com.blamejared.crafttweaker.api.CraftTweakerAPI;
 import com.blamejared.crafttweaker.api.annotations.ZenRegister;
 import com.blamejared.crafttweaker.api.item.IItemStack;
 import com.mrbysco.foodtweaker.ct.food.MCFood;
-import org.openzen.zencode.java.ZenCodeType.Method;
-import org.openzen.zencode.java.ZenCodeType.Name;
+import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@Name("mods.foodtweaker")
+@ZenCodeType.Name("mods.foodtweaker")
 public class ChangeFoodCT {
 
-    @Method
+    @ZenCodeType.Method
     public static void changeFood(IItemStack stack, MCFood food) {
         CraftTweakerAPI.apply(new ActionChangeFood(stack, food));
     }
 
-    @Method
+    @ZenCodeType.Method
     public static void removeFood(IItemStack stack) {
+        CraftTweakerAPI.apply(new ActionRemoveFood(stack));
+    }
+
+    @ZenCodeType.Method
+    public static void removeFood(IItemStack[] stack) {
         CraftTweakerAPI.apply(new ActionRemoveFood(stack));
     }
 }
