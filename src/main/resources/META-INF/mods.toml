@@ -23,3 +23,11 @@ mandatory=true
 versionRange="[1.14.4]"
 ordering="NONE"
 side="BOTH"
+
+
+[[dependencies.foodtweaker]]
+modId="crafttweaker"
+mandatory=true
+versionRange="[5.0.0.89,]"
+ordering="NONE"
+side="BOTH"

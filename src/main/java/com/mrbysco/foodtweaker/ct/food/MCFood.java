@@ -28,21 +28,21 @@ public class MCFood {
     @ZenCodeType.Method
     public MCFood meat() {
         Food newInternal = this.getInternal();
-        changeValue(newInternal, "food", true);
+        changeValue(newInternal, "field_221472_c", true); //"meat"
         return new MCFood(newInternal);
     }
 
     @ZenCodeType.Method
     public MCFood setAlwaysEdible() {
         Food newInternal = this.getInternal();
-        changeValue(newInternal, "canEatWhenFull", true);
+        changeValue(newInternal, "field_221473_d", true); //"canEatWhenFull"
         return new MCFood(newInternal);
     }
 
     @ZenCodeType.Method
     public MCFood fastToEat() {
         Food newInternal = this.getInternal();
-        changeValue(newInternal, "fastToEat", true);
+        changeValue(newInternal, "field_221474_e", true); //"fastToEat"
         return new MCFood(newInternal);
     }
 
@@ -51,7 +51,7 @@ public class MCFood {
         Food newInternal = this.getInternal();
         List<Pair<EffectInstance, Float>> effectList = Lists.newArrayList();
         effectList.add(Pair.of(effect.getInternal(), probability));
-        changeValue(newInternal, "effects", effectList);
+        changeValue(newInternal, "field_221475_f", effectList); //"effects"
         return new MCFood(newInternal);
     }
 
@@ -65,7 +65,7 @@ public class MCFood {
                 effectList.add(Pair.of(effects[i].getInternal(), probability[i]));
             }
         }
-        changeValue(newInternal, "effects", effectList);
+        changeValue(newInternal, "field_221475_f", effectList); //"effects"
         return new MCFood(newInternal);
     }
 

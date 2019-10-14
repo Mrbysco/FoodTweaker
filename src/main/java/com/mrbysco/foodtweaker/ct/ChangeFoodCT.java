@@ -7,7 +7,7 @@ import com.mrbysco.foodtweaker.ct.food.MCFood;
 import org.openzen.zencode.java.ZenCodeType;
 
 @ZenRegister
-@ZenCodeType.Name("mods.foodtweaker")
+@ZenCodeType.Name("mods.foodtweaker.Tweaker")
 public class ChangeFoodCT {
 
     @ZenCodeType.Method

@@ -15,11 +15,11 @@ public class RomanUtil {
 
         // Converting to roman
         String thousands = m[num/1000];
-        String hundereds = c[(num%1000)/100];
+        String hundreds = c[(num%1000)/100];
         String tens = x[(num%100)/10];
         String ones = i[num%10];
 
-        String ans = thousands + hundereds + tens + ones;
+        String ans = thousands + hundreds + tens + ones;
 
         return ans;
     }

@@ -34,7 +34,7 @@ minecraft {
             // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+            // property 'forge.logging.console.level', 'debug'
 
             mods {
                 foodtweaker {
@@ -50,7 +50,7 @@ minecraft {
             // property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 
             // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
+            // property 'forge.logging.console.level', 'debug'
 
             mods {
                 foodtweaker {
@@ -107,9 +107,9 @@ dependencies {
 	runtimeOnly fg.deobf("mezz.jei:jei-1.14.4:6.0.0.18")
 	
 	// compile against the JEI API but do not include it at runtime
-	compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker:1.14.4-5.0.0.87")
+	compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-1.14.4:5.0.0.89")
 	// at runtime, use the full JEI jar
-	runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker:1.14.4-5.0.0.87")
+	runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-1.14.4:5.0.0.89")
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -131,4 +131,8 @@ jar {
 //    description = 'Creates a JAR containing the non-obfuscated compiled code.'
 //    from sourceSets.main.output
 //    classifier = "deobf"
+//}
+
+//artifacts {
+//    archives deobfJar
 //}

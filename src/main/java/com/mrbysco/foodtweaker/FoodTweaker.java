@@ -23,7 +23,6 @@ public class FoodTweaker {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public FoodTweaker() {
-        // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
@@ -62,11 +61,11 @@ public class FoodTweaker {
 
     public static void changeFood(Item item, Food food) {
         LOGGER.info("Changing food value of " + item.getName());
-        ObfuscationReflectionHelper.setPrivateValue(Item.class, item, food, "food");
+        ObfuscationReflectionHelper.setPrivateValue(Item.class, item, food, "field_219974_q"); //"food"
     }
 
     public static void removeFood(Item item) {
         LOGGER.info("Remove food values from " + item.getName());
-        ObfuscationReflectionHelper.setPrivateValue(Item.class, item, null, "food");
+        ObfuscationReflectionHelper.setPrivateValue(Item.class, item, null, "field_219974_q"); //"food"
     }
 }
