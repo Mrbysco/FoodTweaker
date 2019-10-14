@@ -10,6 +10,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openzen.zencode.java.ZenCodeType;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @ZenRegister
 @ZenCodeType.Name("mods.foodtweaker.MCFood")
@@ -95,8 +96,8 @@ public class MCFood {
     }
 
     @ZenCodeType.Getter("effects")
-    public List<Pair<EffectInstance, Float>> getEffects() {
-        return this.internal.getEffects();
+    public List<Pair<MCEffectInstance, Float>> getEffects() {
+        return internal.getEffects().stream().map(pair -> Pair.of(new MCEffectInstance(pair.getLeft()), pair.getRight())).collect(Collectors.toList());
     }
 
     private static <T> void changeValue(Food food, String name, T value) {
