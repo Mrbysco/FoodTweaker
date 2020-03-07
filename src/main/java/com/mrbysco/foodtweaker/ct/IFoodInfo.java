@@ -4,10 +4,9 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenSetter;
 
-@ZenClass("foodtweaker.IFood")
+@ZenClass("foodtweaker.IFoodInfo")
 @ZenRegister
-public interface IFood {
-
+public interface IFoodInfo {
 	@ZenSetter("heal")
 	void setHeal(int amount);
 

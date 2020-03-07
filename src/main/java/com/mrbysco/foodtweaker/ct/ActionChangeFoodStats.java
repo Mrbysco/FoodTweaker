@@ -2,7 +2,6 @@ package com.mrbysco.foodtweaker.ct;
 
 import com.mrbysco.foodtweaker.FoodTweaker;
 import com.mrbysco.foodtweaker.FoodInfo;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
@@ -13,7 +12,7 @@ public class ActionChangeFoodStats implements IAction {
 	private final ItemStack stack;
 	private final FoodInfo foodInfo;
 
-	public ActionChangeFoodStats(IItemStack input, MCFood food) {
+	public ActionChangeFoodStats(IItemStack input, MCFoodInfo food) {
 		this.stack = CraftTweakerMC.getItemStack(input);
 		this.foodInfo = (FoodInfo)food.getInternal();
 	}

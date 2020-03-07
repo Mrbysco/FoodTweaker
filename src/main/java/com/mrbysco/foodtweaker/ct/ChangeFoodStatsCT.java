@@ -10,7 +10,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 public class ChangeFoodStatsCT {
 	@ZenMethod
-	public static void changeFoodStats(IItemStack input, MCFood info) {
+	public static void changeFoodStats(IItemStack input, MCFoodInfo info) {
 		CraftTweakerAPI.apply(new ActionChangeFoodStats(input, info));
 	}
 }

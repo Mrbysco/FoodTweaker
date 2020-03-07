@@ -6,14 +6,14 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
-public class MCFood implements IFood{
+public class MCFoodInfo implements IFoodInfo {
 	private final FoodInfo internal;
 
-	public MCFood(FoodInfo internal) {
+	public MCFoodInfo(FoodInfo internal) {
 		this.internal = internal;
 	}
 
-	public MCFood(IItemStack iItemStack) {
+	public MCFoodInfo(IItemStack iItemStack) {
 		ItemStack stack = CraftTweakerMC.getItemStack(iItemStack);
 		if(!(stack.getItem() instanceof ItemFood))
 			throw new IllegalArgumentException("stack does not extend ItemFood");
