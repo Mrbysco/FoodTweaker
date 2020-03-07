@@ -2,44 +2,35 @@ package com.mrbysco.foodtweaker.ct;
 
 import com.mrbysco.foodtweaker.FoodTweaker;
 import com.mrbysco.foodtweaker.FoodInfo;
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
 public class ActionChangeFoodStats implements IAction {
 	private final ItemStack stack;
-	private final int healAmount;
-	private final float saturationAmount;
-	private final float sanityAmount;
-	private final boolean changeAlwaysEdible;
-	private final boolean alwaysEdible;
+	private final FoodInfo foodInfo;
 
-	public ActionChangeFoodStats(IItemStack input, int heal, float saturation, boolean changeAlwaysEdible, boolean alwaysEdible) {
+	public ActionChangeFoodStats(IItemStack input, MCFood food) {
 		this.stack = CraftTweakerMC.getItemStack(input);
-		this.healAmount = heal;
-		this.saturationAmount = saturation;
-		this.sanityAmount = 0.0F;
-		this.changeAlwaysEdible = changeAlwaysEdible;
-		this.alwaysEdible = alwaysEdible;
-	}
-
-	public ActionChangeFoodStats(IItemStack input, int heal, float saturation, float sanity, boolean changeAlwaysEdible, boolean alwaysEdible) {
-		this.stack = CraftTweakerMC.getItemStack(input);
-		this.healAmount = heal;
-		this.saturationAmount = saturation;
-		this.sanityAmount = sanity;
-		this.changeAlwaysEdible = changeAlwaysEdible;
-		this.alwaysEdible = alwaysEdible;
+		this.foodInfo = (FoodInfo)food.getInternal();
 	}
 
 	@Override
 	public void apply() {
-		FoodTweaker.addFoodInfo(stack, new FoodInfo(healAmount, saturationAmount, sanityAmount, changeAlwaysEdible, alwaysEdible));
+		if(stack.getItem() instanceof ItemFood) {
+			FoodTweaker.addFoodInfo(stack, foodInfo);
+		}
 	}
 
 	@Override
 	public String describe() {
-		return String.format("Changed food stats for " + stack.getDisplayName() + " has been changed");
+		if(stack.getItem() instanceof ItemFood) {
+			return String.format("Changed food stats for " + stack.getDisplayName() + " has been changed");
+		} else {
+			return String.format("Could not change stats for " + stack.getDisplayName() + " as it isn't an instance of ItemFood");
+		}
 	}
 }

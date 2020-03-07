@@ -1,40 +1,58 @@
 package com.mrbysco.foodtweaker;
 
 public class FoodInfo {
-
 	private int healAmount;
 	private float saturationAmount;
-	private float sanityAmount;
-	private boolean changeAlwaysEdible;
+	private float sanityAmount = 0.0F;
+	private boolean isWolfsFavoriteMeat;
 	private boolean alwaysEdible;
 
-	public FoodInfo(int heal, float saturation, boolean changeAlwaysEdible, boolean alwaysEdible) {
+	public FoodInfo(int heal, float saturation) {
 		this.healAmount = heal;
 		this.saturationAmount = saturation;
-		this.sanityAmount = 0.0F;
-		this.changeAlwaysEdible = changeAlwaysEdible;
-		this.alwaysEdible = alwaysEdible;
 	}
 
-	public FoodInfo(int heal, float saturation, float sanity, boolean changeAlwaysEdible, boolean alwaysEdible) {
-		this.healAmount = heal;
-		this.saturationAmount = saturation;
-		this.sanityAmount = sanity;
-		this.changeAlwaysEdible = changeAlwaysEdible;
+	public FoodInfo(int heal, float saturation, boolean isWolfsFavoriteMeat, boolean alwaysEdible) {
+		this(heal, saturation);
+		this.isWolfsFavoriteMeat = isWolfsFavoriteMeat;
 		this.alwaysEdible = alwaysEdible;
-	}
-
-	public int getHealAmount() { return healAmount; }
-
-	public float getSaturationAmount() {
-		return saturationAmount;
 	}
 
 	public float getSanityAmount() {
 		return sanityAmount;
 	}
 
-	public boolean isAlwaysEdibleChanged() { return changeAlwaysEdible; }
+	public void setSanity(float amount) {
+		this.sanityAmount = amount;
+	}
 
-	public boolean isAlwaysEdible() { return alwaysEdible; }
+	public int getHealAmount() { return healAmount; }
+
+	public void setHealAmount(int healAmount) {
+		this.healAmount = healAmount;
+	}
+
+	public float getSaturationAmount() {
+		return saturationAmount;
+	}
+
+	public void setSaturationAmount(float saturationAmount) {
+		this.saturationAmount = saturationAmount;
+	}
+
+	public boolean isWolfsFavoriteMeat() {
+		return isWolfsFavoriteMeat;
+	}
+
+	public void setWolfsFavoriteMeat(boolean wolfsFavoriteMeat) {
+		isWolfsFavoriteMeat = wolfsFavoriteMeat;
+	}
+
+	public boolean isAlwaysEdible() {
+		return alwaysEdible;
+	}
+
+	public void setAlwaysEdible(boolean alwaysEdible) {
+		this.alwaysEdible = alwaysEdible;
+	}
 }
