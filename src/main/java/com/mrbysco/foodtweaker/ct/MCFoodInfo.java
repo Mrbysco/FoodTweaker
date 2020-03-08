@@ -7,6 +7,7 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenConstructor;
 import stanhebben.zenscript.annotations.ZenSetter;
 
 @ZenClass("foodtweaker.MCFoodInfo")
@@ -18,6 +19,7 @@ public class MCFoodInfo {
 		this.internal = internal;
 	}
 
+	@ZenConstructor
 	public MCFoodInfo(IItemStack iItemStack) {
 		ItemStack stack = CraftTweakerMC.getItemStack(iItemStack);
 		if(!(stack.getItem() instanceof ItemFood))
