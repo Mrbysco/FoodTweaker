@@ -19,5 +19,4 @@ public class TweakedFoodStats extends FoodStats {
 			this.addStats(foodItem.getHealAmount(stack), foodItem.getSaturationModifier(stack));
 
 	}
-
 }

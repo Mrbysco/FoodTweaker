@@ -110,8 +110,8 @@ public class FoodHandler {
 							if(food.isWolfsFavoriteMeat != info.isWolfsFavoriteMeat())
 								food.isWolfsFavoriteMeat = info.isWolfsFavoriteMeat();
 
-							if(food.isWolfsFavoriteMeat != info.isAlwaysEdible())
-								food.isWolfsFavoriteMeat = info.isAlwaysEdible();
+							if(food.alwaysEdible != info.isAlwaysEdible())
+								food.alwaysEdible = info.isAlwaysEdible();
 						}
 					}
 				}

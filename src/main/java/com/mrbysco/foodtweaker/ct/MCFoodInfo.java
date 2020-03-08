@@ -8,9 +8,9 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenConstructor;
-import stanhebben.zenscript.annotations.ZenSetter;
+import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("foodtweaker.MCFoodInfo")
+@ZenClass("foodtweaker.FoodInfo")
 @ZenRegister
 public class MCFoodInfo {
 	private final FoodInfo internal;
@@ -29,27 +29,27 @@ public class MCFoodInfo {
 		internal = new FoodInfo(food.healAmount, food.saturationModifier, food.isWolfsFavoriteMeat, food.alwaysEdible);
 	}
 
-	@ZenSetter("heal")
+	@ZenMethod
 	public void setHeal(int amount) {
 		internal.setHealAmount(amount);
 	}
 
-	@ZenSetter("saturation")
+	@ZenMethod
 	public void setSaturation(float amount) {
 		internal.setSaturationAmount(amount);
 	}
 
-	@ZenSetter("sanity")
+	@ZenMethod
 	public void setSanity(float sanity) {
 		internal.setSanity(sanity);
 	}
 
-	@ZenSetter("alwaysEdible")
+	@ZenMethod
 	public void setAlwaysEdible(boolean alwaysEdible) {
 		internal.setAlwaysEdible(alwaysEdible);
 	}
 
-	@ZenSetter("meat")
+	@ZenMethod
 	public void setMeat(boolean isMeat) {
 		internal.setWolfsFavoriteMeat(isMeat);
 	}
