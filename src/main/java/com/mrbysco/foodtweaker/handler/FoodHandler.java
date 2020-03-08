@@ -6,7 +6,6 @@ import com.mrbysco.foodtweaker.event.FoodStatsEvent;
 import com.mrbysco.foodtweaker.event.TweakedFoodStats;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.FoodStats;

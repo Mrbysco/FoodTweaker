@@ -1,7 +1,7 @@
 package com.mrbysco.foodtweaker.ct;
 
-import com.mrbysco.foodtweaker.FoodTweaker;
 import com.mrbysco.foodtweaker.FoodInfo;
+import com.mrbysco.foodtweaker.FoodTweaker;
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;

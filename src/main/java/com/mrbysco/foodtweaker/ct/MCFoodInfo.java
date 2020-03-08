@@ -29,6 +29,11 @@ public class MCFoodInfo {
 		internal = new FoodInfo(food.healAmount, food.saturationModifier, food.isWolfsFavoriteMeat, food.alwaysEdible);
 	}
 
+	@ZenConstructor
+	public MCFoodInfo(int healAmount, float saturation, boolean isMeat, boolean alwaysEdible) {
+		internal = new FoodInfo(healAmount, saturation, isMeat, alwaysEdible);
+	}
+
 	@ZenMethod
 	public void setHeal(int amount) {
 		internal.setHealAmount(amount);
