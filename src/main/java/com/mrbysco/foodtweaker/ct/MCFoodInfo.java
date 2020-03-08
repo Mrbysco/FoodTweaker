@@ -1,15 +1,20 @@
 package com.mrbysco.foodtweaker.ct;
 
 import com.mrbysco.foodtweaker.FoodInfo;
+import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenSetter;
 
-public class MCFoodInfo implements IFoodInfo {
+@ZenClass("foodtweaker.MCFoodInfo")
+@ZenRegister
+public class MCFoodInfo {
 	private final FoodInfo internal;
 
-	public MCFoodInfo(FoodInfo internal) {
+	private MCFoodInfo(FoodInfo internal) {
 		this.internal = internal;
 	}
 
@@ -22,33 +27,32 @@ public class MCFoodInfo implements IFoodInfo {
 		internal = new FoodInfo(food.healAmount, food.saturationModifier, food.isWolfsFavoriteMeat, food.alwaysEdible);
 	}
 
-	@Override
+	@ZenSetter("heal")
 	public void setHeal(int amount) {
 		internal.setHealAmount(amount);
 	}
 
-	@Override
+	@ZenSetter("saturation")
 	public void setSaturation(float amount) {
 		internal.setSaturationAmount(amount);
 	}
 
-	@Override
+	@ZenSetter("sanity")
 	public void setSanity(float sanity) {
 		internal.setSanity(sanity);
 	}
 
-	@Override
+	@ZenSetter("alwaysEdible")
 	public void setAlwaysEdible(boolean alwaysEdible) {
 		internal.setAlwaysEdible(alwaysEdible);
 	}
 
-	@Override
+	@ZenSetter("meat")
 	public void setMeat(boolean isMeat) {
 		internal.setWolfsFavoriteMeat(isMeat);
 	}
 
-	@Override
-	public Object getInternal() {
+	public FoodInfo getInternal() {
 		return internal;
 	}
 }

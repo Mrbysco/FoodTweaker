@@ -14,7 +14,7 @@ public class ActionChangeFoodStats implements IAction {
 
 	public ActionChangeFoodStats(IItemStack input, MCFoodInfo food) {
 		this.stack = CraftTweakerMC.getItemStack(input);
-		this.foodInfo = (FoodInfo)food.getInternal();
+		this.foodInfo = food.getInternal();
 	}
 
 	@Override
