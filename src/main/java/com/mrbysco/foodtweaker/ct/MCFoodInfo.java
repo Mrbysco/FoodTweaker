@@ -35,28 +35,38 @@ public class MCFoodInfo {
 	}
 
 	@ZenMethod
-	public void setHeal(int amount) {
-		internal.setHealAmount(amount);
+	public MCFoodInfo setHeal(int amount) {
+		FoodInfo copy = internal;
+		copy.setHealAmount(amount);
+		return new MCFoodInfo(copy);
 	}
 
 	@ZenMethod
-	public void setSaturation(float amount) {
-		internal.setSaturationAmount(amount);
+	public MCFoodInfo setSaturation(float amount) {
+		FoodInfo copy = internal;
+		copy.setSaturationAmount(amount);
+		return new MCFoodInfo(copy);
 	}
 
 	@ZenMethod
-	public void setSanity(float sanity) {
-		internal.setSanity(sanity);
+	public MCFoodInfo setSanity(float sanity) {
+		FoodInfo copy = internal;
+		copy.setSanity(sanity);
+		return new MCFoodInfo(copy);
 	}
 
 	@ZenMethod
-	public void setAlwaysEdible(boolean alwaysEdible) {
-		internal.setAlwaysEdible(alwaysEdible);
+	public MCFoodInfo setAlwaysEdible(boolean alwaysEdible) {
+		FoodInfo copy = internal;
+		copy.setAlwaysEdible(alwaysEdible);
+		return new MCFoodInfo(copy);
 	}
 
 	@ZenMethod
-	public void setMeat(boolean isMeat) {
-		internal.setWolfsFavoriteMeat(isMeat);
+	public MCFoodInfo setMeat(boolean isMeat) {
+		FoodInfo copy = internal;
+		copy.setWolfsFavoriteMeat(isMeat);
+		return new MCFoodInfo(copy);
 	}
 
 	public FoodInfo getInternal() {

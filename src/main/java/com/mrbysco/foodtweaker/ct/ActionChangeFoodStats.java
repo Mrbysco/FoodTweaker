@@ -5,6 +5,7 @@ import com.mrbysco.foodtweaker.FoodTweaker;
 import crafttweaker.IAction;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
+import net.minecraft.item.ItemFishFood;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 
@@ -27,9 +28,9 @@ public class ActionChangeFoodStats implements IAction {
 	@Override
 	public String describe() {
 		if(stack.getItem() instanceof ItemFood) {
-			return String.format("Changed food stats for " + stack.getDisplayName() + " has been changed");
+			return "Changed food stats for " + stack.getDisplayName() + " has been changed";
 		} else {
-			return String.format("Could not change stats for " + stack.getDisplayName() + " as it isn't an instance of ItemFood");
+			return "Could not change stats for " + stack.getDisplayName() + " as it isn't an instance of ItemFood";
 		}
 	}
 }

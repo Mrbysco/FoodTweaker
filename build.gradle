@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 //Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 
 
-version = "1.1"
+version = "1.1.2"
 group = "com.mrbysco.foodtweaker" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "FoodTweaker"
 
@@ -55,6 +55,9 @@ repositories {
         name = "CurseForge"
         url = "https://minecraft.curseforge.com/api/maven/"
     }
+	maven {
+		url "http://www.ryanliptak.com/maven/"
+	}
 }
 
 dependencies {
@@ -62,6 +65,8 @@ dependencies {
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.+"
 	
 	deobfCompile "mezz.jei:jei_1.12.2:4.11.0.+"
+	
+	deobfCompile "applecore:AppleCore:1.12.2-3.2.0:deobf"
 	
 	compile files("lib/tiffitlib-1.0.3.jar")
 	compile files("lib/sanity-1.0.3.jar")

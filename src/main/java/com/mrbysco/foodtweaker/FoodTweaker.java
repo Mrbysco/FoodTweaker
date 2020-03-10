@@ -1,9 +1,12 @@
 package com.mrbysco.foodtweaker;
 
+import com.mrbysco.foodtweaker.handler.AppleCoreHandler;
 import com.mrbysco.foodtweaker.handler.FoodHandler;
+import com.mrbysco.foodtweaker.handler.SanityHandler;
 import com.mrbysco.foodtweaker.proxy.CommonProxy;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -40,7 +43,15 @@ public class FoodTweaker {
 	@EventHandler
 	public void Preinit(FMLPreInitializationEvent event)
 	{
-		MinecraftForge.EVENT_BUS.register(new FoodHandler());
+		if(Loader.isModLoaded("sanity")) {
+			MinecraftForge.EVENT_BUS.register(new SanityHandler());
+		}
+
+		if(Loader.isModLoaded("applecore")) {
+			MinecraftForge.EVENT_BUS.register(new AppleCoreHandler());
+		} else {
+			MinecraftForge.EVENT_BUS.register(new FoodHandler());
+		}
 	}
 
 

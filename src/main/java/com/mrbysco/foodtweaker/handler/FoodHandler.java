@@ -5,17 +5,14 @@ import com.mrbysco.foodtweaker.FoodTweaker;
 import com.mrbysco.foodtweaker.event.FoodStatsEvent;
 import com.mrbysco.foodtweaker.event.TweakedFoodStats;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.FoodStats;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FoodHandler {
@@ -47,6 +44,7 @@ public class FoodHandler {
 	@SubscribeEvent
 	public void StatHandler(FoodStatsEvent event) {
 		ItemStack stackCopy = event.getStack().copy();
+		stackCopy.setCount(1);
 		for (Map.Entry<ItemStack, FoodInfo> entry : FoodTweaker.instance.foodInfo.entrySet()) {
 			ItemStack key = entry.getKey();
 			FoodInfo info = entry.getValue();
@@ -58,32 +56,6 @@ public class FoodHandler {
 					event.setSaturation(info.getSaturationAmount());
 			}
 		}
-	}
-
-	@SubscribeEvent
-	public void SanityEvent(LivingEntityUseItemEvent.Finish event)
-	{
-		if(event.getEntityLiving() instanceof EntityPlayerMP){
-			EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
-			for(HashMap.Entry<ItemStack, FoodInfo> entry : FoodTweaker.instance.foodInfo.entrySet()) {
-				ItemStack compareStack = entry.getKey();
-				FoodInfo info = entry.getValue();
-				if(compareStack.isItemEqualIgnoreDurability(event.getItem())) {
-					if(info.getSanityAmount() != 0.0F) {
-						induceSanity(player, info.getSanityAmount());
-					}
-					break;
-				} else {
-					return;
-				}
-			}
-		}
-	}
-
-	@Method(modid = "sanity")
-	public void induceSanity(EntityPlayerMP player, float sanity) {
-		net.tiffit.sanity.SanityCapability cap = player.getCapability(net.tiffit.sanity.SanityCapability.INSTANCE, null);
-		cap.increaseSanity(sanity);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
