@@ -30,34 +30,28 @@ public class FoodTweaker {
 
 	public static HashMap<ItemStack, FoodInfo> foodInfo = new HashMap<ItemStack, FoodInfo>();
 
-	public static void addFoodInfo(ItemStack food, FoodInfo info)
-	{
+	public static void addFoodInfo(ItemStack food, FoodInfo info) {
 		// Check if the info doesn't already exist
-		if(foodInfo.containsKey(food) ) {
+		if(foodInfo.containsKey(food))
 			return;
-		} else {
+		else
 			foodInfo.put(food, info);
-		}
 	}
 
 	@EventHandler
-	public void Preinit(FMLPreInitializationEvent event)
-	{
-		if(Loader.isModLoaded("sanity")) {
+	public void Preinit(FMLPreInitializationEvent event) {
+		if(Loader.isModLoaded("sanity"))
 			MinecraftForge.EVENT_BUS.register(new SanityHandler());
-		}
 
-		if(Loader.isModLoaded("applecore")) {
+		if(Loader.isModLoaded("applecore"))
 			MinecraftForge.EVENT_BUS.register(new AppleCoreHandler());
-		} else {
+		else
 			MinecraftForge.EVENT_BUS.register(new FoodHandler());
-		}
 	}
 
 
 	@EventHandler
-	public void Postinit(FMLPostInitializationEvent event)
-	{
+	public void Postinit(FMLPostInitializationEvent event) {
 
 	}
 }

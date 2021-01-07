@@ -12,17 +12,16 @@ import java.util.HashMap;
 
 public class SanityHandler {
 	@SubscribeEvent
-	public void SanityEvent(LivingEntityUseItemEvent.Finish event)
-	{
-		if(event.getEntityLiving() instanceof EntityPlayerMP){
+	public void SanityEvent(LivingEntityUseItemEvent.Finish event) {
+		if(event.getEntityLiving() instanceof EntityPlayerMP) {
 			EntityPlayerMP player = (EntityPlayerMP) event.getEntityLiving();
 			for(HashMap.Entry<ItemStack, FoodInfo> entry : FoodTweaker.instance.foodInfo.entrySet()) {
 				ItemStack compareStack = entry.getKey();
 				FoodInfo info = entry.getValue();
 				if(compareStack.isItemEqualIgnoreDurability(event.getItem())) {
-					if(info.getSanityAmount() != 0.0F) {
+					if(info.getSanityAmount() != 0.0F)
 						induceSanity(player, info.getSanityAmount());
-					}
+
 					break;
 				} else {
 					return;

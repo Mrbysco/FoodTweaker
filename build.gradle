@@ -43,9 +43,6 @@ repositories {
 	maven {
         url "http://maven.blamejared.com"
 	}
-	maven { 
-		url "http://tehnut.info/maven" 
-	}
 	maven {
         name = "thiakil"
         url = "http://maven.thiakil.com"
@@ -67,10 +64,10 @@ dependencies {
 	deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
 	deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.20.+"
 	
-	deobfCompile "mezz.jei:jei_1.12.2:4.11.0.+"
+	deobfCompile "mezz.jei:jei_1.12.2:4.16.1.+"
 	
-	deobfCompile "applecore:AppleCore:1.12.2-3.2.0:deobf"
-	
+	deobfCompile "applecore:AppleCore:1.12.2-3.4.0:deobf"
+
 	compile files("lib/tiffitlib-1.0.3.jar")
 	compile files("lib/sanity-1.0.3.jar")
 }
@@ -97,9 +94,7 @@ processResources {
 }
 
 jar {
-
 	manifest {
-	
 	    attributes 'FMLAT': 'foodtweaker_at.cfg'
 	}
 }

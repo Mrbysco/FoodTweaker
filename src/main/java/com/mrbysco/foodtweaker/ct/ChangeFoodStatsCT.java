@@ -13,4 +13,9 @@ public class ChangeFoodStatsCT {
 	public static void changeFoodStats(IItemStack input, MCFoodInfo info) {
 		CraftTweakerAPI.apply(new ActionChangeFoodStats(input, info));
 	}
+
+	@ZenMethod
+	public static void changeFoodStats(IItemStack[] input, MCFoodInfo info) {
+		CraftTweakerAPI.apply(new ActionChangeFoodStats(input, info));
+	}
 }

@@ -11,8 +11,7 @@ public class FoodStatsEvent extends Event {
 	private int healAmount;
 	private float saturationModifier;
 
-	public FoodStatsEvent(ItemStack stack, int healAmount, float saturation)
-	{
+	public FoodStatsEvent(ItemStack stack, int healAmount, float saturation) {
 		super();
 		this.foodStack = stack;
 		this.healAmount = healAmount;
@@ -20,8 +19,7 @@ public class FoodStatsEvent extends Event {
 	}
 
 	@Nonnull
-	public ItemStack getStack()
-	{
+	public ItemStack getStack() {
 		return foodStack;
 	}
 
@@ -33,13 +31,11 @@ public class FoodStatsEvent extends Event {
 		return saturationModifier;
 	}
 
-	public void setHealAmount(int amount)
-	{
+	public void setHealAmount(int amount) {
 		this.healAmount = amount;
 	}
 
-	public void setSaturation(float amount)
-	{
+	public void setSaturation(float amount) {
 		this.saturationModifier = amount;
 	}
 }
